@@ -1,0 +1,23 @@
+CREATE TABLE `question` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `problem_statement` varchar(255) DEFAULT NULL,
+  `subject_id` bigint(20) NOT NULL,
+  `difficulty_level` int(11) DEFAULT NULL,
+  `is_multi_option_correct` bit(1) DEFAULT NULL,
+  `standard` int(11) DEFAULT NULL,
+  `chapter_id` bigint(20) DEFAULT NULL,
+  `chapter_topic_id` bigint(20) DEFAULT NULL,
+  `added_by_user_id` bigint(20) DEFAULT NULL,
+  `contributor_id` bigint(20) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `q_chapter_id_key` (`chapter_id`),
+  KEY `q_chapter_topic_id_key` (`chapter_topic_id`),
+  KEY `q_subject_id_key` (`subject_id`),
+  CONSTRAINT `q_chapter_topic_id_key` FOREIGN KEY (`chapter_topic_id`) REFERENCES `chapter_topic` (`id`),
+  CONSTRAINT `q_subject_id_key` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`),
+  CONSTRAINT `q_chapter_id_key` FOREIGN KEY (`chapter_id`) REFERENCES `chapter` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
